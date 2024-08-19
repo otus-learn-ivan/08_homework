@@ -16,7 +16,7 @@ jobs:
         with:
           submodules: true
       - run: sudo apt-get update && sudo apt-get install cmake libboost-test-dev -y
-      - run: |
+      - run: 
       	  echo "github.run_number: ${{ github.run_number }}"
       	  cmake . -DPATCH_VERSION=${{ github.run_number }}
       	  echo "CMake output:"
