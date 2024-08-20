@@ -18,12 +18,14 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install cmake libboost-test-dev -y    
       - run: sudo apt-get update && sudo apt-get install cmake libboost-program-options-dev -y    
       - run: sudo apt-get update && sudo apt install libboost-regex-dev    
+      - run: pkg-config --cflags libboost-regex    
+      - run: dpkg -l libboost-regex-dev    
       - run: |
           echo "github.run_number: ${{ github.run_number }}"
           cmake . -DPATCH_VERSION=${{ github.run_number }}
           echo "CMake output:"
-          cmake --build . --verbose
-      #- run: cmake --build . --verbose
+      #    cmake --build . --verbose
+      - run: cmake --build . 
       - run: cmake --build . --target test
       - run: cmake --build . --target package
       - name: Create Release
