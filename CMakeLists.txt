@@ -8,11 +8,7 @@ project(bayan_prg VERSION ${PROJECT_VESRION})
 find_package(Boost COMPONENTS unit_test_framework program_options regex REQUIRED)
 
 
-#find_package(Boost COMPONENTS program_options REQUIRED)
 message(${Boost_LIBRARIES})
-
-#find_package(Boost REQUIRED COMPONENTS program_options)
-#include_directories(${Boost_INCLUDE_DIRS})
 
 
 add_executable(bayan main.cpp)
@@ -28,27 +24,20 @@ set_target_properties(test_bayan PROPERTIES
 )
 
 set_target_properties(bayan PROPERTIES
-    #COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
     INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
 )
 
-# target_link_libraries(helloworld_cli PRIVATE
-#     helloworld
-# )
 
 target_link_libraries(test_bayan
     ${Boost_LIBRARIES}    
 )
 
-#find_package(Boost REQUIRED COMPONENTS regex)
-#include_directories(${Boost_INCLUDE_DIRS})
 
 target_link_libraries(bayan
     ${Boost_LIBRARIES}
     ${Boost_REGEX_LIBRARY}
 )
 
-#target_link_libraries(bayan ${Boost_LIBRARIES})
 
 if (MSVC)
     target_compile_options(bayan PRIVATE
