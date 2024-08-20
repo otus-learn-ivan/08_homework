@@ -17,6 +17,7 @@ jobs:
           submodules: true
       - run: sudo apt-get update && sudo apt-get install cmake libboost-test-dev -y    
       - run: sudo apt-get update && sudo apt-get install cmake libboost-program-options-dev -y    
+      - run: sudo apt-get update && sudo apt install libboost-regex-dev    
       - run: |
           echo "github.run_number: ${{ github.run_number }}"
           cmake . -DPATCH_VERSION=${{ github.run_number }}
