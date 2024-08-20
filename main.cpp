@@ -248,7 +248,7 @@ public:
         }
         cout <<"-- answer: " << files.size() <<" --------------------------------\n";
         for(auto it = files.begin();it!=files.end();it++){
-            cout << "\t" << it->name << "crc: " << it->crc_key <<"\n";
+            cout << "\t" << it->name << " crc: " << it->crc_key <<"\n";
             if(it+1 !=files.end()){
                 if(it->crc_key !=(it+1)->crc_key){ cout << "\n";}
             }
@@ -345,15 +345,18 @@ Tinint_prm start_wit_argc(int argc, char ** argv){
     po::options_description desc("Allowed options");
     desc.add_options()
         ("help,h", "Просмотр справки")
-        ("scan_directories,sd", po::value<vector<string>>()->multitoken(), "Директории для сканирования")
-        ("except_directories,exd", po::value<vector<string>>()->multitoken(), "Директории для исключения из сканирования")
-        ("scan_level,sl",po::value<int>()->default_value(inint_prm.include_prm.scan_level), "Уровень сканирования (один на все директории, 0 - только указанная директория без вложенных)")
-        ("min_file_size,min",po::value<int>()->default_value(inint_prm.include_prm.min_file_size), "Минимальный размер файла, по умолчанию проверяются все файлы больше 1 байта.")
+        ("scan_directories,s", po::value<vector<string>>()->multitoken(), "Директории для сканирования")
+        ("except_directories,e", po::value<vector<string>>()->multitoken(), "Директории для исключения из сканирования")
+        ("scan_level,l",po::value<int>()->default_value(inint_prm.include_prm.scan_level), "Уровень сканирования (один на все директории, 0 - только указанная директория без вложенных)")
+        ("min_file_size,f",po::value<unsigned long int>()->default_value(inint_prm.include_prm.min_file_size), "Минимальный размер файла, по умолчанию проверяются все файлы больше 1 байта.")
         ("mask_name_files,m", po::value<vector<string>>()->multitoken(), "Маски имен файлов разрешенных для сравнения (не зависят от регистра ?- один символ, * - любое колличество символов)")
-        ("size_blok,szb",po::value<int>()->default_value(inint_prm.compare_prm.size_blok), "Размер блока, которым производится чтения файлов")
-        ("hesh,hs", po::value<string>()->default_value(inint_prm.hesh), "Один из имеющихся алгоритмов хэширования (crc32, md5)")
+        ("size_blok,b",po::value<int>()->default_value(inint_prm.compare_prm.size_blok), "Размер блока, которым производится чтения файлов")
+        ("hesh,x", po::value<string>()->default_value(inint_prm.hesh), "Один из имеющихся алгоритмов хэширования (crc32, md5)")
             ;
 
+    for(int i;i < argc ;i++){
+        std::cout << argv[i] << " " ;
+    }
 
     po::variables_map vm;
     po::store(po::parse_command_line(argc, argv, desc), vm);
