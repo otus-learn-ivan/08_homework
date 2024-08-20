@@ -25,7 +25,7 @@ jobs:
       - run: cmake --build . 
       - run: cmake --build . --target test
       - run: cmake --build . --target package
-      - name: Run test_bayan    
+      #- name: Run test_bayan    
       - run: ./test_bayan    
       - name: Create Release
         id: create_release
