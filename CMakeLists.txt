@@ -5,7 +5,9 @@ set(PROJECT_VESRION 0.1.${PATCH_VERSION})
 
 project(bayan_prg VERSION ${PROJECT_VESRION})
 
-find_package(Boost COMPONENTS unit_test_framework program_options REQUIRED)
+find_package(Boost COMPONENTS unit_test_framework program_options regex REQUIRED)
+
+
 #find_package(Boost COMPONENTS program_options REQUIRED)
 message(${Boost_LIBRARIES})
 
@@ -37,8 +39,13 @@ set_target_properties(bayan PROPERTIES
 target_link_libraries(test_bayan
     ${Boost_LIBRARIES}    
 )
+
+#find_package(Boost REQUIRED COMPONENTS regex)
+#include_directories(${Boost_INCLUDE_DIRS})
+
 target_link_libraries(bayan
     ${Boost_LIBRARIES}
+    ${Boost_REGEX_LIBRARY}
 )
 
 #target_link_libraries(bayan ${Boost_LIBRARIES})
